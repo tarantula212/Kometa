@@ -208,8 +208,8 @@ class Library(ABC):
                 if not image_compare or str(poster.compare) != str(image_compare):
                     if overlay:
                         self.reload(item, force=True)
-                        if overlay and "Overlay" in [la.tag for la in self.item_labels(item)]:
-                            item.removeLabel("Overlay")
+                        if overlay and "Kometa-Overlay" in [la.tag for la in self.item_labels(item)]:
+                            item.removeLabel("Kometa-Overlay")
                     poster_uploaded = self._upload_image(item, poster)
                     logger.info(f"Metadata: {poster.attribute} updated {poster.message}")
                 elif self.show_asset_not_needed:

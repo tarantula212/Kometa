@@ -1350,8 +1350,8 @@ class Plex(Library):
                     except BadRequest as e:
                         logger.stacktrace()
                         logger.error(f"Plex Error: {e}")
-                if poster and "Overlay" in [la.tag for la in self.item_labels(item)]:
-                    logger.info(self.edit_tags("label", item, remove_tags="Overlay", do_print=False))
+                if poster and "Kometa-Overlay" in [la.tag for la in self.item_labels(item)]:
+                    logger.info(self.edit_tags("label", item, remove_tags="Kometa-Overlay", do_print=False))
             else:
                 logger.warning(f"{text} | No Reset Image Found")
 
@@ -1396,7 +1396,7 @@ class Plex(Library):
         name = None
         try:
             poster, background, logo, item_dir, name = self.find_item_assets(item, asset_directory=asset_directory)
-            if "Overlay" not in current_labels:
+            if "Kometa-Overlay" not in current_labels:
                 if poster or background or logo:
                     self.upload_images(item, poster=poster, background=background, logo=logo)
                 elif self.show_missing_assets:
@@ -1418,7 +1418,7 @@ class Plex(Library):
                         found_season = True
                     elif self.show_missing_season_assets and season.seasonNumber and season.seasonNumber > 0:
                         missing_seasons += f"\nMissing Season {season.seasonNumber} Poster"
-                    if season_poster or season_background or season_logo and "Overlay" not in [la.tag for la in self.item_labels(season)]:
+                    if season_poster or season_background or season_logo and "Kometa-Overlay" not in [la.tag for la in self.item_labels(season)]:
                         self.upload_images(season, poster=season_poster, background=season_background, logo=season_logo)
                 except Failed as e:
                     if self.show_missing_assets:
@@ -1429,7 +1429,7 @@ class Plex(Library):
                             episode_poster, episode_background, episode_logo, _, _ = self.find_item_assets(episode, item_asset_directory=item_dir, asset_directory=asset_directory, folder_name=name)
                             if episode_poster or episode_background or episode_logo:
                                 found_episode = True
-                                if "Overlay" not in [la.tag for la in self.item_labels(episode)]:
+                                if "Kometa-Overlay" not in [la.tag for la in self.item_labels(episode)]:
                                     self.upload_images(episode, poster=episode_poster, background=episode_background, logo=episode_logo)
                             elif self.show_missing_episode_assets:
                                 missing_episodes += f"\nMissing {episode.seasonEpisode.upper()} Title Card"

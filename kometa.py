@@ -709,7 +709,7 @@ def run_libraries(config):
                 for library_type in library_types:
                     for item in library.get_all(builder_level=library_type):
                         try:
-                            sync = ["Overlay"] if "Overlay" in [lbl.tag for lbl in item.labels] else []
+                            sync = ["Kometa-Overlay"] if "Kometa-Overlay" in [lbl.tag for lbl in item.labels] else []
                             library.edit_tags("label", item, sync_tags=sync)
                         except NotFound:
                             logger.error(f"{item.title[:25]:<25} | Labels Failed to be Removed")

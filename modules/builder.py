@@ -3301,7 +3301,7 @@ class CollectionBuilder:
         for item in self.items:
             item = self.library.reload(item)
             current_labels = [la.tag for la in self.library.item_labels(item)]
-            if "item_assets" in self.item_details and self.asset_directory and "Overlay" not in current_labels:
+            if "item_assets" in self.item_details and self.asset_directory and "Kometa-Overlay" not in current_labels:
                 self.library.find_and_upload_assets(item, current_labels, asset_directory=self.asset_directory)
             self.library.edit_tags("label", item, add_tags=add_tags, remove_tags=remove_tags, sync_tags=sync_tags)
             self.library.edit_tags("genre", item, add_tags=add_genres, remove_tags=remove_genres, sync_tags=sync_genres)

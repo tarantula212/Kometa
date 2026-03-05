@@ -789,7 +789,7 @@ class Operations:
                         ignore_overlays = self.library.mass_poster_update.get("ignore_overlays")
                         thumb_locked = any(f.name == "thumb" and f.locked for f in item.fields)
                         labels = [la.tag for la in self.library.item_labels(item)]
-                        has_overlay_label = "Overlay" in labels
+                        has_overlay_label = "Kometa-Overlay" in labels
 
                         # Bypass ignore_locked and ignore_overlays checks if the source is "unlock" or "lock"
                         if source in ["unlock", "lock"]:

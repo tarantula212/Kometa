@@ -60,7 +60,7 @@ class Overlays:
             for i, item in enumerate(remove_overlays, 1):
                 item_title = self.library.get_item_display_title(item)
                 logger.ghost(f"Restoring: {i}/{len(remove_overlays)} {item_title}")
-                self.remove_overlay(item, item_title, "Overlay", [
+                self.remove_overlay(item, item_title, "Kometa-Overlay", [
                     os.path.join(self.library.overlay_backup, f"{item.ratingKey}.png"),
                     os.path.join(self.library.overlay_backup, f"{item.ratingKey}.jpg"),
                     os.path.join(self.library.overlay_backup, f"{item.ratingKey}.webp")
@@ -96,7 +96,7 @@ class Overlays:
                     self.library.reload(item, force=True)
 
                     overlay_compare = [] if overlay_compare is None else util.get_list(overlay_compare, split="|")
-                    has_overlay = any([item_tag.tag.lower() == "overlay" for item_tag in self.library.item_labels(item)])
+                    has_overlay = any([item_tag.tag.lower() == "kometa-overlay" for item_tag in self.library.item_labels(item)])
 
                     compare_names = {properties[ov].get_overlay_compare(): ov for ov in over_names}
                     blur_num = 0
@@ -542,7 +542,7 @@ class Overlays:
                                 else:
                                     new_poster.save(temp, exif=exif_tags)
                                 self.library.upload_poster(item, temp)
-                                self.library.edit_tags("label", item, add_tags=["Overlay"], do_print=False)
+                                self.library.edit_tags("label", item, add_tags=["Kometa-Overlay"], do_print=False)
                                 poster_compare = poster.compare if poster else item.thumb
                                 logger.info(f"  Overlays Applied: {', '.join(over_names)}")
                         except (OSError, BadRequest, SyntaxError) as e:
@@ -685,7 +685,7 @@ class Overlays:
                             key_to_overlays[over_key][1].remove(v)
         return key_to_overlays, properties
 
-    def get_overlay_items(self, label="Overlay", libtype=None, ignore=None):
+    def get_overlay_items(self, label="Kometa-Overlay", libtype=None, ignore=None):
         items = self.library.search(label=label, libtype=libtype)
         return items if not ignore else [o for o in items if o.ratingKey not in ignore]
 
